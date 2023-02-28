@@ -7,6 +7,7 @@ import 'device.dart';
 import 'media.dart';
 import 'events.dart';
 import 'ptz.dart';
+import 'imaging.dart';
 
 part 'capabilities.g.dart';
 
@@ -34,8 +35,16 @@ class Capabilities {
   @JsonKey(name: 'PTZ')
   final Ptz? ptz;
 
+  @JsonKey(name: 'Imaging')
+  final Imaging? imaging;
+
   Capabilities(
-      {this.analytics, this.device, this.media, this.events, this.ptz});
+      {this.analytics,
+      this.device,
+      this.media,
+      this.events,
+      this.ptz,
+      this.imaging});
 
   factory Capabilities.fromJson(Map<String, dynamic> json) =>
       _$CapabilitiesFromJson(json);

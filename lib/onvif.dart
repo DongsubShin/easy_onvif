@@ -62,6 +62,7 @@ export 'src/model/zoom_limits.dart';
 export 'src/model/probe/probe_match.dart';
 export 'src/authorization.dart';
 export 'src/device_management.dart';
+export 'src/imaging.dart';
 export 'src/media.dart';
 export 'src/multicast_probe.dart';
 export 'src/onvif_base.dart';

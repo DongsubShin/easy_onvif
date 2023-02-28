@@ -8,6 +8,7 @@ class Xmlns {
   static final xsd = 'http://www.w3.org/2001/XMLSchema';
   static final tt = 'http://www.onvif.org/ver10/schema';
   static final tptz = 'http://www.onvif.org/ver20/ptz/wsdl';
+  static final timg = 'http://www.onvif.org/ver20/imaging/wsdl';
   static final tds = 'http://www.onvif.org/ver10/device/wsdl';
   static final dn = 'http://www.onvif.org/ver10/network/wsdl';
   static final trt = 'http://www.onvif.org/ver10/media/wsdl';
@@ -659,6 +660,31 @@ class SoapRequest {
   static XmlDocumentFragment startMulticastStreaming() {
     builder.element('StartMulticastStreaming', nest: () {
       builder.namespace(Xmlns.trt);
+    });
+
+    return builder.buildFragment();
+  }
+
+  static XmlDocumentFragment setImagingSetting(
+      String videoSourceToken, int irCutFilter_number) {
+    builder.element('SetImagingSettings', nest: () {
+      builder.namespace(Xmlns.timg);
+      builder.element('VideoSourceToken', nest: () {
+        builder.namespace(Xmlns.timg);
+        builder.text(videoSourceToken);
+      });
+      builder.element('ImagingSettings', nest: () {
+        builder.namespace(Xmlns.timg);
+        builder.element('IrCutFilter', nest: () {
+          builder.namespace(Xmlns.tt);
+          builder.text(irCutFilter_number);
+        });
+        // builder.namespace(Xmlns.timg);
+        // builder.element('Sharpness', nest: () {
+        //   builder.namespace(Xmlns.tt);
+        //   builder.text(0.5);
+        // });
+      });
     });
 
     return builder.buildFragment();

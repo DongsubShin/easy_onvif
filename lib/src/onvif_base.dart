@@ -17,6 +17,7 @@ class Onvif with UiLoggy {
   Duration? _timeDelta;
   Media? _media;
   Ptz? _ptz;
+  Imaging? _imaging;
 
   Duration get timeDelta => _timeDelta!;
 
@@ -30,6 +31,12 @@ class Onvif with UiLoggy {
     if (_ptz == null) throw Exception('PTZ services not available');
 
     return _ptz!;
+  }
+
+  Imaging get imaging {
+    if (_imaging == null) throw Exception('Imaging services not available');
+
+    return _imaging!;
   }
 
   Onvif(
@@ -118,6 +125,12 @@ class Onvif with UiLoggy {
             uri: _serviceUriOfHost(
                 serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!));
       }
+      if (serviceMap.containsKey('http://www.onvif.org/ver20/imaging/wsdl')) {
+        _imaging = Imaging(
+            onvif: this,
+            uri: _serviceUriOfHost(
+                serviceMap['http://www.onvif.org/ver20/imaging/wsdl']!));
+      }
     } catch (error) {
       loggy.warning('GetServices command not supported');
     } finally {
@@ -131,6 +144,10 @@ class Onvif with UiLoggy {
       if (capabilities.ptz?.xAddr != null) {
         _ptz =
             Ptz(onvif: this, uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
+      }
+      if (capabilities.imaging?.xAddr != null) {
+        _imaging = Imaging(
+            onvif: this, uri: _serviceUriOfHost(capabilities.imaging!.xAddr));
       }
     }
 

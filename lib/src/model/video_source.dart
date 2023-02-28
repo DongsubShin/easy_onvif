@@ -4,7 +4,7 @@ import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'resolution.dart';
-import 'imaging.dart';
+import 'imaging_configuration.dart';
 
 part 'video_source.g.dart';
 
@@ -25,13 +25,13 @@ class VideoSource {
 
   ///Optional configuration of the image sensor.
   @JsonKey(name: 'Imaging')
-  final Imaging? imaging;
+  final ImagingConfiguration? imagingConfiguration;
 
   VideoSource(
       {required this.token,
       required this.frameRate,
       required this.resolution,
-      this.imaging});
+      this.imagingConfiguration});
 
   factory VideoSource.fromJson(Map<String, dynamic> json) =>
       _$VideoSourceFromJson(json);

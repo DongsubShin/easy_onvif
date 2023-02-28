@@ -12,9 +12,10 @@ VideoSource _$VideoSourceFromJson(Map<String, dynamic> json) => VideoSource(
           OnvifUtil.mappedToString(json['Framerate'] as Map<String, dynamic>),
       resolution:
           Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
-      imaging: json['Imaging'] == null
+      imagingConfiguration: json['Imaging'] == null
           ? null
-          : Imaging.fromJson(json['Imaging'] as Map<String, dynamic>),
+          : ImagingConfiguration.fromJson(
+              json['Imaging'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VideoSourceToJson(VideoSource instance) =>
@@ -22,5 +23,5 @@ Map<String, dynamic> _$VideoSourceToJson(VideoSource instance) =>
       '@token': instance.token,
       'Framerate': instance.frameRate,
       'Resolution': instance.resolution.toJson(),
-      'Imaging': instance.imaging?.toJson(),
+      'Imaging': instance.imagingConfiguration?.toJson(),
     };
